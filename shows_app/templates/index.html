@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login/Register Page</title>
+	<meta name="description" content="Register and login">
+    {% load static %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-3">Register</h1>
+        <div id="home">
+            <form action="/register" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="text" name="confirm_password" id="confirm_password" class="form-control">
+                </div>
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        {% endif %}
+        <div class='container'>
+            <h1 class="display-3">Login</h1>
+            <form action='/login' method='POST'>
+                {% csrf_token %}
+                <label for='email'>Email</label>
+                <input type="text" name="email" id="email" class="form-control">
+                <label for="password">Password</label>
+                <input type="text" name="password" id="password" class="form-control">
+                <button class='btn btn-primary mt-2' type='submit'>Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

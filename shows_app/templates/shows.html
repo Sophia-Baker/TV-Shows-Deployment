@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Shows Dashboard</title>
+	<meta name="Show Table" content="List of All Shows">
+    {% load static %}
+	<!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+    <div class='container'>
+        <nav class='navbar navbar-light bg-light p-2'>
+        <h2>Howdy, {{user.first_name}}!!!</h2>
+        <h1> All Shows</h1>
+        <button type="button" class="btn btn-outline-primary"><a href='/'>Logout</a></button>
+        </nav>
+    </div>
+    <div class='container'>
+        <table class='table table-dark'>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Network</th>
+                    <th>Release Date</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for show in user_shows %}
+                <tr>
+                    <td>{{ show.title }}</td>
+                    <td>{{ show.network }}</td>
+                    <td>{{ show.release_date }}</td>
+                    <td>{{ show.description }}</td>
+                    <td><a href='/{{ show.id }}'>Show</a></a> | <a href="/{{ show.id }}/edit">Edit</a> | <a href='/{{ show.id }}/delete'>Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class='container'>
+    <button type="button" class="btn btn-outline-primary"><a href='/new'>Create a New Show!</a></button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Edit Show</title>
+	<meta name="description" content="Edit Show details">
+    {% load static %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+    <body>
+        <nav class='navbar navbar-expand-lg navbar-light bg-light p-2'>
+            <h1 class="display-3">Edit {{ show.title }}</h1>
+            <button type="button" class="btn btn-outline-primary"><a href="/dashboard">TV Shows</a></button>
+            <button type="button" class="btn btn-outline-primary"><a href='/'>Logout</a></button>
+        </nav>
+        <div class="container">
+            <form action="/{{show.id}}/update" method="POST">
+                {% csrf_token %}
+                <div class='form-group'>
+                    <label for='title'>Title</label>
+                    <input type='text' id='title' name='title' value= '{{ show.title }}' class ='form-control'>
+                </div>
+                <div class='form-group'>
+                    <label for='network'>Network</label>
+                    <input type='text' id='network' name='network' value= '{{ show.network }}' class ='form-control'>
+                </div>
+                <div class='form-group'>
+                    <label for='release_date'>Release Date</label>
+                    <input type='Date' id='release_date' name='release_date' value= '{{ show.release_date|date:'Y-m-d' }}' class ='form-control'>
+                </div>
+                <div class='form-group'>
+                    <label for='description'>Description</label>
+                    <textarea name='description' id='description' cols='30' rows='10' class='form-control'>{{ show.description }}</textarea>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        </li>{{ message }}</li>
+                    {% endfor %}
+                {% endif %}
+                <button type='submit' class="btn btn-primary">Update</button>
+            </form>
+        </div> 
+    </body>
+</html>
